@@ -1,0 +1,7 @@
+.imgrick {
+    -webkit-box-reflect: below -8px linear-gradient(to top, rgba(255, 255, 255, 0.2), 10%, transparent 16%);
+  }
+  
+  .highlighted-text {
+    color: rgba(150, 1, 1, 1);
+  }
