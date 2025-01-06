@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -11,6 +11,9 @@ import Box from '@mui/material/Box';
 import { Grid, ToggleButton, Divider } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import GoogleSignInButton from '../../components/GoogleButton';
+import { login } from '../../api/Login_api'; // Import the login function
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 function Copyright() {
     return (
@@ -28,9 +31,43 @@ function Copyright() {
 export default function Login() {
 
     const [selectedTab, setSelectedTab] = React.useState('login'); // State to keep track of selected button
+    const [isLoading, setIsLoading] = useState(true);
+
+    useEffect(() => {
+        AOS.init({
+            duration: 1000,
+            once: true
+        });
+        
+        window.scrollTo(0, 0);
+        
+        const img = new Image();
+        img.src = 'https://www.miamidesigndistrict.com/images/listings/large/363_rick-owens_1630503172238324.jpg';
+        img.onload = () => setIsLoading(false);
+    
+    }, []);
+
+    const handleSubmit = async (event) => {
+        event.preventDefault(); // Prevent default form submission
+        const formData = new FormData(event.currentTarget);
+        const email = formData.get('email'); // Get email using FormData
+        const password = formData.get('password'); // Get password using FormData
+        console.log('Logging in with:', { email, password });
+        try {
+            const roles = await login(email, password);
+            console.log('User roles:', roles);
+        } catch (error) {
+            console.error('Login failed:', error.message);
+        }
+    };
 
     return (
-        <Grid container component="main" sx={{ height: '100vh' }}>
+        <Grid container  sx={{
+            height: '100vh',
+            visibility: isLoading ? 'hidden' : 'visible',
+            opacity: isLoading ? 0 : 1,
+            transition: 'opacity 0.3s ease-in-out'
+        }}>
             <CssBaseline />
             {/* Full-Screen Background */}
             <Box
@@ -93,6 +130,8 @@ export default function Login() {
                 }}
             >
                 <Box
+                    data-aos="fade-up"
+                    data-aos-delay="200"
                     sx={{
 
                         marginTop: 2,
@@ -106,14 +145,25 @@ export default function Login() {
                         width="80"
                         height="80"
                         alt="."
+                        data-aos="zoom-in"
+                        data-aos-delay="400"
                     >
 
                     </img>
-                    <Typography fontFamily="Nothing You Could Do" component="h1" variant="h5" sx={{ mt: 1, mb: 2 }}>
+                    <Typography 
+                        fontFamily="Nothing You Could Do" 
+                        component="h1" 
+                        variant="h5" 
+                        sx={{ mt: 1, mb: 2 }}
+                        data-aos="fade-up"
+                        data-aos-delay="600"
+                    >
                         DnilbThrift
                     </Typography>
 
                     <Box
+                        data-aos="fade-up"
+                        data-aos-delay="800"
                         sx={{
                             mt: 1,
                             display: 'flex',
@@ -144,7 +194,13 @@ export default function Login() {
                         </ToggleButton>
                     </Box>
 
-                    <Box component="form" noValidate >
+                    <Box 
+                        component="form" 
+                        noValidate 
+                        onSubmit={handleSubmit}
+                        data-aos="fade-up"
+                        data-aos-delay="1000"
+                    >
                         <TextField
                             margin="normal"
                             required
@@ -241,11 +297,6 @@ export default function Login() {
                         {selectedTab === "login" && (
                         <GoogleSignInButton />
                         )}
-
-
-
-
-
 
                         <Box mt={2} mb={1}>
                             <Copyright />

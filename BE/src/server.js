@@ -1,10 +1,13 @@
+require('dotenv').config(); // Load .env variables
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors'); // Import CORS middleware
 const dbConfig = require('./config/db.config');
-const productRoutes = require('./routes/product.routes');
 const swaggerUi = require('swagger-ui-express');
 const swaggerSpec = require('./config/swagger'); // Import the swagger.js file
+const productRoutes = require('./routes/product.routes');
+const userRoutes = require('./routes/user.routes');
+const authRoutes = require('./routes/auth.routes');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -32,6 +35,8 @@ mongoose.connect(dbConfig.uri, {
 
 // Use product routes
 app.use('/api', productRoutes); // Mount routes on `/api`
+app.use('/api/users', userRoutes);
+app.use('/api/auth', authRoutes);
 
 // Start the server
 app.listen(PORT, () => {

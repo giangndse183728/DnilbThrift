@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Box from '@mui/material/Box';
 import { Button, Grid, Typography,  Card, CardMedia, CardContent } from '@mui/material';
 import InstagramIcon from '@mui/icons-material/Instagram';
@@ -8,9 +8,18 @@ import DoubleBorderButton from '../../components/ButtonCus';
 import Stack from '@mui/material/Stack';
 import './HomepageStyle.css'
 import Content from './Content';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 
 export default function Home() {
+  useEffect(() => {
+    AOS.init({
+      duration: 800,
+      once: true
+    });
+  }, []);
+
   return (
     <>
       <Grid container component="main" >
@@ -31,7 +40,7 @@ export default function Home() {
           }}
         />
         <Grid container sx={{ m:8}}>
-          <Grid item xs={6}  >
+          <Grid item xs={6} data-aos="fade-right">
           
           <Box
           
@@ -56,10 +65,10 @@ export default function Home() {
     
             
             </Box>
-            <Typography fontFamily="Nothing You Could Do" variant='h5' sx={{mt: 8,textAlign:"center"}}>- <span className="highlighted-text">✠</span> - RO Kiss Boots - <span className="highlighted-text">✠</span> - </Typography>
+            <Typography fontFamily="Nothing You Could Do" variant='h5' sx={{mt: 8,textAlign:"center"}} data-aos="fade-up" >- <span className="highlighted-text">✠</span> - RO Kiss Boots - <span className="highlighted-text">✠</span> - </Typography>
           </Grid>
 
-          <Grid item xs={6}  >
+          <Grid item xs={6} data-aos="fade-left">
             <Typography fontFamily="RocknRoll One" variant='h5' sx={{ mb: 4 }}>Welcome to <span className="highlighted-text"> Dnilbthrift </span>: Your Ultimate Fashion Destination</Typography>
 
             <Typography variant="subtitle1" color='#4a4949'>
@@ -116,7 +125,7 @@ export default function Home() {
         <Grid item xs={12}>
         <Divider sx={{width:"50%", margin: '0 auto'}}>♱</Divider>
         </Grid>
-        <Box
+        <Box data-aos="fade-left"
   sx={{
     width: '100%',
     height: '680px',
@@ -139,12 +148,12 @@ export default function Home() {
   }}
 ></Box>
 
-<Grid item xs={12}>
+<Grid item xs={12} data-aos="fade-up">
         <Typography fontFamily="RocknRoll One" variant='h4' sx={{ mt: 5 , textAlign:"center"}}>  🕀 Collection  </Typography>
 
-        <Typography  variant='subtitle1' sx={{ mt: 2 , mb: 3, mx:20, textAlign:"center"}}>  Explore Our Exclusive Collection: Discover limited-edition and rare item from brands like Rick Owens, Balenciaga.... Each piece is in excellent condition and offered at a great price, bringing you high fashion and exceptional value. </Typography>
+        <Typography  variant='subtitle1' sx={{ mt: 2 , mb: 3, mx:20, textAlign:"center"}} data-aos="fade-up" data-aos-delay="200">  Explore Our Exclusive Collection: Discover limited-edition and rare item from brands like Rick Owens, Balenciaga.... Each piece is in excellent condition and offered at a great price, bringing you high fashion and exceptional value. </Typography>
 
-        <Stack direction="row"  spacing={10} justifyContent="center" sx={{ mb:3}}>
+        <Stack direction="row"  spacing={10} justifyContent="center" sx={{ mb:3}} data-aos="fade-up" data-aos-delay="400">
   <Avatar src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQUiCrqtdM2fXotnSKYEE8kwolg16aCcm47VQ&s' sx={{ width: 90, height: 90 }}/>
   <Avatar src='https://i.pinimg.com/736x/f7/18/53/f71853230b0569507333dc4546d20c4c.jpg' sx={{ width: 90, height: 90 }}/>
   <Avatar  src='https://d2q79iu7y748jz.cloudfront.net/s/_squarelogo/256x256/a5311836eaab67de2b7be277ec7e789d'sx={{ width: 90, height: 90 }}/>

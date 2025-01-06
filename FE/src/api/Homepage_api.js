@@ -3,7 +3,7 @@ import axios from "axios";
 
 export const fetchItems = async () => {
   try {
-    const response = await axios.get('http://localhost:5000/api/items')
+    const response = await axios.get('http://localhost:8000/api/items')
  
     return response;
   } catch (error) {

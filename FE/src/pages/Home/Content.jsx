@@ -3,12 +3,19 @@ import { Button, Grid, Typography, Card, CardMedia, CardContent, Rating } from '
 import { styled } from '@mui/material/styles';
 import HeartBrokenIcon from '@mui/icons-material/HeartBroken';
 import HeartBrokenOutlinedIcon from '@mui/icons-material/HeartBrokenOutlined';
-import { fetchItems } from '../../api/db';
+import { fetchItems } from '../../api/Homepage_api';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 export default function Content() {
   const [clothes, setClothes] = useState([]);
 
   useEffect(() => {
+    AOS.init({
+      duration: 800,
+      once: true,
+    });
+    
     const getItems = async () => {
       try {
         const items = await fetchItems();
@@ -30,7 +37,10 @@ export default function Content() {
     
     <Grid container spacing={1} sx={{mt:3, justifyContent: 'center'}}>
     {clothes.map((clothes) => (
-      <Grid item xs={12} sm={3} key={clothes.id} sx={{ display: 'flex', justifyContent: 'center' }} >
+      <Grid item xs={12} sm={3} key={clothes.id} sx={{ display: 'flex', justifyContent: 'center' }}
+        data-aos="fade-up"
+        data-aos-delay={clothes.id * 150}
+      >
         <Card 
         
           elevation={3} 
